@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connected = false;
 
     QImage blackframe = QImage(640, 480, QImage::Format_RGB888);
-    //blackframe.fil
+
     blackframe.fill(Qt::black);
     displayFrame(blackframe);
 
@@ -34,13 +34,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::displayFrame(QImage image) {
     connected = true;
-    frames++;
     ui->label->setPixmap(QPixmap::fromImage(image));
-    ui->statusBar->showMessage("Showing frame "+QString::number(frames));
+    if(frames++ > 0)
+        ui->statusBar->showMessage("Showing frame "+QString::number(frames));
 }
 
 void MainWindow::camFound(QString url) {
     qDebug() << "Activating cam";
+    ui->statusBar->showMessage("Connecting to camera at "+url);
     if(videoThread->isRunning())
         videoThread->requestInterruption();
     videoThread->setUrl(url);

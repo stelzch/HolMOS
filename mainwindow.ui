@@ -109,11 +109,17 @@
         <property name="minimum">
          <number>-99</number>
         </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="tickPosition">
          <enum>QSlider::TicksAbove</enum>
+        </property>
+        <property name="tickInterval">
+         <number>0</number>
         </property>
        </widget>
       </item>

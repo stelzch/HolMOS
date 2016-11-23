@@ -7,11 +7,11 @@ Cam::Cam(QObject *parent) : QObject(parent)
     connect(discovery, SIGNAL(camDiscovered(QHostAddress,quint16,quint16)), this, SLOT(discoveryReceived(QHostAddress,quint16,quint16)));
 }
 void Cam::discoveryReceived(QHostAddress addr, quint16 videoPort, quint16 controlPort) {
-    qDebug() << "Found cam";
 
     // Exit if the message was repeated and ports didn't change
     if(videoPort == this->videoPort && controlPort == this->controlPort)
         return;
+    qDebug() << "Found cam";
     this->videoPort = videoPort;
     this->controlPort = controlPort;
     this->hostname = addr;

@@ -35,7 +35,7 @@ void CamDiscovery::processDatagrams() {
                 qDebug() << "Invalid port numbers. VideoPort: " << videoPort << " ControlPort: " << controlPort;
                 return;
             }
-            qDebug() << "Ports: " << videoPort << " and " << controlPort;
+            //qDebug() << "Ports: " << videoPort << " and " << controlPort;
             emit camDiscovered(sender, videoPort, controlPort);
         } else {
             qDebug() << "Received " << message << " from " << sender.toString() << ":" << senderPort;

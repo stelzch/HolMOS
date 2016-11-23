@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QSlider>
 #include <QComboBox>
-#include "connectdialog.h"
 #include "videothread.h"
 #include "cam.h"
 
@@ -30,7 +29,6 @@ private:
     Ui::MainWindow *ui;
     VideoThread *videoThread;
     bool connected;
-    ConnectDialog *connectDialog;
     Cam *cam;
     int frames =0;
 };
