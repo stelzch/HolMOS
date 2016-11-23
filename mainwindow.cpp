@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(cam, SIGNAL(camFound(QString)), this, SLOT(camFound(QString)));
     videoThread = new VideoThread(this);
     QObject::connect(videoThread, SIGNAL(frameReceived(QImage)), this, SLOT(displayFrame(QImage)));
+    QObject::connect(ui->brightnessSlider, SIGNAL(valueChanged(int)), this, SLOT(setIntParameter(int)));
+    QObject::connect(ui->contrastSlider, SIGNAL(valueChanged(int)), this, SLOT(setIntParameter(int)));
+    QObject::connect(ui->isoCombo, SIGNAL(activated(QString)), this, SLOT(setStrParameter(QString)));
 }
 
 MainWindow::~MainWindow()
@@ -65,4 +68,20 @@ void MainWindow::disconnect() {
     ui->actionTrennen->setEnabled(false);
     ui->actionVerbinden->setEnabled(true);
     videoThread->requestInterruption();
+}
+void MainWindow::setIntParameter(int value) {
+    QObject *sender = QObject::sender();
+    if(sender == ui->brightnessSlider) {
+        qDebug() << "Setting brightness to " << value;
+        cam->setBrightness(value);
+    } else if(sender == ui->contrastSlider) {
+        qDebug() << "Setting contrast to " << value;
+        cam->setContrast(value);
+    }
+}
+void MainWindow::setStrParameter(QString value) {
+    QObject *sender = QObject::sender();
+    if(sender == ui->isoCombo) {
+        cam->setIso(value);
+    }
 }

@@ -2,12 +2,8 @@
 #define CAMCONTROL_H
 
 #include <QObject>
-#include <QTcpSocket>
 #include <QHostAddress>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QEventLoop>
+#include <QUdpSocket>
 
 class CamControl : public QObject
 {
@@ -20,8 +16,7 @@ signals:
 public slots:
 
 private:
-    QNetworkAccessManager *manager;
-    QTcpSocket *socket;
+    QUdpSocket *socket;
     QHostAddress addr;
     quint16 port;
 };

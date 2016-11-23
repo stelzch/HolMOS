@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSlider>
+#include <QComboBox>
 #include "connectdialog.h"
 #include "videothread.h"
 #include "cam.h"
@@ -23,6 +25,8 @@ public slots:
     void connect(bool);
     void disconnect();
     void camFound(QString url);
+    void setIntParameter(int value);
+    void setStrParameter(QString value);
 
 private:
     Ui::MainWindow *ui;

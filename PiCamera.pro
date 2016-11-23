@@ -31,8 +31,8 @@ FORMS    += mainwindow.ui \
     connectdialog.ui
 
 CONFIG += static
-#unix: CONFIG += link_pkgconfig
-#unix: PKGCONFIG += libavcodec libswscale libavutil libavformat
+unix: CONFIG += link_pkgconfig
+unix: PKGCONFIG += libavcodec libswscale libavutil libavformat
 linux-g++-32: LIBS += -L/opt/ffmpeg-static/lib -lswscale -lm -lavformat -ldl -lxcb -lxcb-shm -lxcb-xfixes -lxcb-shape -lX11 -lm -llzma -lbz2 -lz -pthread -lavcodec -ldl -lxcb -lxcb-shm -lxcb-xfixes -lxcb-shape -lX11 -lm -llzma -lbz2 -lz -pthread -lswresample -lm -lavutil -lm
 
 CONFIG += staticlib
