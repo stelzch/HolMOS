@@ -15,20 +15,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     videothread.cpp \
-    connectdialog.cpp \
     camdiscovery.cpp \
     cam.cpp \
     camcontrol.cpp
 
 HEADERS  += mainwindow.h \
     videothread.h \
-    connectdialog.h \
     camdiscovery.h \
     cam.h \
     camcontrol.h
 
-FORMS    += mainwindow.ui \
-    connectdialog.ui
+FORMS    += mainwindow.ui
 
 CONFIG += static
 unix: CONFIG += link_pkgconfig

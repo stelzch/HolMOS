@@ -73,7 +73,6 @@ void VideoThread::run() {
             break;
         }
         avcodec_decode_video2(codecCtx, frame, &frameFinished, &packet);
-        qDebug() << "Received packet" << endl;
         if(frameFinished) {
             // Convert frame to RGB24
             sws_scale(swsCtx, frame->data, frame->linesize, 0, codecCtx->height, frameRGB->data, frameRGB->linesize);
@@ -85,7 +84,7 @@ void VideoThread::run() {
             frames++;
             emit frameReceived(img);
 
-            qDebug() << "Finished Frame #" << frames++;
+            //qDebug() << "Finished Frame #" << frames++;
         }
         av_free_packet(&packet);
     }

@@ -22,8 +22,6 @@ public:
 
 public slots:
     void displayFrame(QImage);
-    void connect(bool);
-    void disconnect();
     void camFound(QString url);
     void setIntParameter(int value);
     void setStrParameter(QString value);
@@ -34,6 +32,7 @@ private:
     bool connected;
     ConnectDialog *connectDialog;
     Cam *cam;
+    int frames =0;
 };
 
 #endif // MAINWINDOW_H
