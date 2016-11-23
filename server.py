@@ -34,7 +34,7 @@ def set_parameter(parameter, value):
 		camera.brightness = value
 	elif(parameter == 'contrast'):
 		value = int(value)
-		if(value > -100 and value < 100):
+		if(value > 0 and value < 100):
 			camera.contrast = value
 	elif(parameter == 'awb_mode'):
 		if(value in list(picamera.PiCamera.AWB_MODES.keys())):
@@ -66,7 +66,7 @@ def set_parameter(parameter, value):
 		if(value in list(picamera.PiCamera.IMAGE_EFFECTS.keys())):
 			camera.image_effect = value
 	elif(parameter == 'iso'):
-		if(value in list('100', '200', '320', '400', '500', '640', '800')):
+		if(value in ['100', '200', '320', '400', '500', '640', '800']):
 			camera.iso = int(value)
 	elif(parameter == 'led'):
 		if(value == 'true'):
@@ -84,3 +84,4 @@ camera.wait_recording(10)
 #set_brightness(camera)
 print("Set brightness")
 camera.wait_recording(200)
+
