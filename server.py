@@ -15,10 +15,9 @@ from Discovery import Discovery
 DISCOVERY_PORT = 13654
 CONTROL_PORT = 8008
 VIDEO_PORT = 8010
-VERSION = '0.01'
 
 camera = picamera.PiCamera()
-camera.resolution = (640, 480)
+camera.resolution = (1280, 720)
 camera.framerate = 20
 
 discovery = Discovery(VIDEO_PORT, CONTROL_PORT)
@@ -80,8 +79,5 @@ camera.start_recording(streamer,
 control = UdpPoller(CONTROL_PORT, set_parameter)
 control.run()
 
-camera.wait_recording(10)
-#set_brightness(camera)
-print("Set brightness")
 camera.wait_recording(200)
 
