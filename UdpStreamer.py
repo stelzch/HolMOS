@@ -1,5 +1,6 @@
 import netifaces as ni
 import socket
+import threading
 
 class UdpStreamer:
 	def __init__(self, port, interface='eth0'):
@@ -32,3 +33,31 @@ class UdpStreamer:
 
 	def send(self, d):
 		self.sock.sendto(d, (self.clientIp, self.clientPort))
+
+class UdpPoller:
+	def __init__(self, port, callback, interface='eth0'):
+		self.ip = str(ni.ifaddresses(interface)[ni.AF_INET][0]['addr'])
+		self.port = port
+		self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		self.sock.bind((self.ip, self.port))
+
+		self.callback = callback
+		self.receiveThread = threading.Thread(target=self.__recv_message__)
+
+	def __recv_message__(self):
+		while True:
+			data, address = self.sock.recvfrom(1024)
+			# Parse the message
+			if(data[:10] == b'RASPBERRY '):
+				message = data[10:].decode('utf-8')
+				message = message.split('=')
+				if(len(message) == 2):
+					self.callback(message[0], message[1])
+					print('Received to set', message[0], 'to', message[1])
+				else:
+					print('Received malformed message: ', data, address)
+			else:
+				print('Received malformed message: ', data, address)
+
+	def run(self):
+		self.receiveThread.start()
