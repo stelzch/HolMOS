@@ -2,7 +2,7 @@
 import time
 import threading
 
-from UdpStreamer import UdpStreamer
+from RaspberryCamServer.UdpStreamer import UdpStreamer
 
 
 class Discovery:
