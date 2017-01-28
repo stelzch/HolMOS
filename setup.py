@@ -27,5 +27,9 @@ setup(
         ],
         keywords='raspberry video streaming camera',
         packages=find_packages(exclude=['contrib','docs','tests']),
-        install_requires=[] # Runtime dependencies
+        install_requires=[# Runtime dependencies
+            'urwid',
+            'picamera',
+            'netifaces'
+        ] 
 )
