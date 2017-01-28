@@ -65,30 +65,40 @@ def handle_input(key):
 	if key in ('q', 'Q'):
 		raise urwid.ExitMainLoop()
 
+loop = urwid.MainLoop(None, palette, unhandled_input=handle_input)
 
 settings = SettingsView()
 error = ErrorView('test')
 frame = urwid.Frame(settings.get_root())
+
 def swap_view(dest, msg=None):
 	print("called")
 	if dest == 'settings':
 		frame = urwid.Frame(settings.get_root())
-		#frame.draw()
-	elif dest == 'error':
-		if msg:
-			error.set_msg(msg)
-		frame = urwid.Frame(error.get_root())
-		#frame.draw()
-
-window = urwid.AttrMap(frame, 'window')
-placeholder = urwid.AttrMap(
+		window = urwid.AttrMap(frame, 'window')
+		placeholder = urwid.AttrMap(
 				urwid.Overlay(window, urwid.SolidFill(),
 					align='center', width=('relative', 87),
 					valign='middle', height=('relative', 87),
 					min_width=20, min_height = 9
 				), 'bg')
+		loop.widget = placeholder
+	elif dest == 'error':
+		if msg:
+			error.set_msg(msg)
+		frame = urwid.Frame(error.get_root())
+		window = urwid.AttrMap(frame, 'window')
+		placeholder = urwid.AttrMap(
+				urwid.Overlay(window, urwid.SolidFill(),
+					align='center', width=('relative', 87),
+					valign='middle', height=('relative', 87),
+					min_width=20, min_height = 9
+				), 'bg')
+		loop.widget = placeholder
+
+swap_view('settings')
 
 
-loop = urwid.MainLoop(placeholder, palette, unhandled_input=handle_input)
+
 loop.screen.set_terminal_properties(colors=256)
 loop.run()
