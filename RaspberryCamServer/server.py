@@ -9,8 +9,8 @@
 import picamera
 import socket
 
-from UdpStreamer import UdpStreamer, UdpPoller
-from Discovery import Discovery
+from RaspberryCamServer.UdpStreamer import UdpStreamer, UdpPoller
+from RaspberryCamServer.Discovery import Discovery
 
 DISCOVERY_PORT = 13654
 CONTROL_PORT = 8008
