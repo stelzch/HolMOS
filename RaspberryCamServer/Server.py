@@ -17,7 +17,7 @@ CONTROL_PORT = 8008
 VIDEO_PORT = 8010
 
 class Server:
-	def __init__(self):
+	def __init__(self, logger):
 		self.camera = picamera.PiCamera()
 		self.camera.resolution = (1280, 720)
 		self.camera.framerate = 20
@@ -31,10 +31,12 @@ class Server:
 		self.control = UdpPoller(CONTROL_PORT, self.set_parameter)
 		self.control.run()
 
-		self.camera.wait_recording(200)
+		#self.camera.wait_recording(200)
 		self.quality = 20
 		self.bitrate = 25000000
 
+		self.log = logger
+		self.log('info','Hello World')
 
 	def set_parameter(parameter, value):
 		if(parameter == 'brightness'):
@@ -100,6 +102,11 @@ class Server:
 			format='h264', quality=20)
 
 	def stop(self):
-		self.camera.stop_recording()
+		try:
+			self.camera.stop_recording()
+		except:
+			pass # I like to live dangerously, too!
+		self.control.stop()
+		self.discovery.stop()
 
 

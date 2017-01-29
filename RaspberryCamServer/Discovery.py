@@ -14,9 +14,14 @@ class Discovery:
 		self.updatePeriod = updatePeriod
 
 	def __discovery_function__(self):
-		while True:
+		t = threading.currentThread()
+		while getattr(t, 'shouldRun', True) == True:
 			self.discoveryStreamer.write(bytes(self.message, 'utf-8'))
 			time.sleep(self.updatePeriod)		
 
 	def run(self):
 		self.discoveryThread.start()
+
+	def stop(self):
+		self.discoveryThread.shouldRun = False
+		self.discoveryThread.join()
